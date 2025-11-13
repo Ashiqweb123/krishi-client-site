@@ -6,10 +6,11 @@ import AllCrops from "../Pages/AllCrops";
 import Login from "../Pages/auth/Login";
 import Register from "../Pages/auth/Register";
 import PrivateRoute from "../Route/PrivateRoute"
+import CropDetails from "../Pages/CropDetails";
 // import AddCrop from "../Pages/AddCrop/AddCrop";
 // import MyPosts from "../Pages/MyPosts/MyPosts";
 // import MyInterests from "../Pages/MyInterests/MyInterests";
-// import CropDetails from "../Pages/CropDetails/CropDetails";
+
 
 
 export const router = createBrowserRouter([
@@ -29,7 +30,13 @@ export const router = createBrowserRouter([
       // { path: "/add-crop", element: <PrivateRoute><AddCrop /></PrivateRoute> },
       // { path: "/my-posts", element: <PrivateRoute><MyPosts /></PrivateRoute> },
       // { path: "/my-interests", element: <PrivateRoute><MyInterests /></PrivateRoute> },
-      // { path: "/crop-details/:id", element: <PrivateRoute><CropDetails /></PrivateRoute> },
+      { path: "/crop-details/:id", element:
+         <PrivateRoute>
+          <CropDetails></CropDetails>
+          </PrivateRoute>,
+        loader:({params})=>fetch(`http://localhost:3000/crops/${params.id}`)  
+        },
+          
       { path: "/auth/login", element: <Login /> },
       { path: "/auth/register", element: <Register /> },
     ],

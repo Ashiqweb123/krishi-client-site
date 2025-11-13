@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.config";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from './AuthContext'
 
 
 const googleProvider = new GoogleAuthProvider();
@@ -68,7 +68,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
