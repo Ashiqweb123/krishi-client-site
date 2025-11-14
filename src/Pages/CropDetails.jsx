@@ -1,10 +1,14 @@
 
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router";
 import CropInterestForm from "../Components/CropInterestForm";
+import CropReceivedInterests from "../Components/CropReceivedInterests";
+import { AuthContext } from "../Context/AuthContext";
 
 
 const CropDetails = () => {
+  const { user } = useContext(AuthContext);
+
   const crop = useLoaderData()
   console.log(crop)
 
@@ -39,6 +43,11 @@ const CropDetails = () => {
       <div>
               <CropInterestForm crop={crop} />
 
+      </div>
+      <div>
+        {user && user.email === crop.owner.ownerEmail && (
+  <CropReceivedInterests crop={crop} />
+)}
       </div>
     </section>
   </div>

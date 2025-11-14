@@ -7,6 +7,11 @@ import Login from "../Pages/auth/Login";
 import Register from "../Pages/auth/Register";
 import PrivateRoute from "../Route/PrivateRoute"
 import CropDetails from "../Pages/CropDetails";
+import AddCrops from "../Pages/AddCrops";
+import MyPosts from "../Pages/MyPosts";
+import Profile from "../Pages/Profile";
+import MyInterests from "../Pages/MyInterests";
+import ErrorPage from "../Pages/ErrorPage";
 // import AddCrop from "../Pages/AddCrop/AddCrop";
 // import MyPosts from "../Pages/MyPosts/MyPosts";
 // import MyInterests from "../Pages/MyInterests/MyInterests";
@@ -26,10 +31,29 @@ export const router = createBrowserRouter([
         element: <AllCrops /> ,
         loader: ()=> fetch('http://localhost:3000/crops'),
       },
-      // { path: "/profile", element: <PrivateRoute><Profile /></PrivateRoute> },
-      // { path: "/add-crop", element: <PrivateRoute><AddCrop /></PrivateRoute> },
-      // { path: "/my-posts", element: <PrivateRoute><MyPosts /></PrivateRoute> },
-      // { path: "/my-interests", element: <PrivateRoute><MyInterests /></PrivateRoute> },
+      { path: "/profile", 
+        element: <PrivateRoute>
+          <Profile></Profile>
+          </PrivateRoute> },
+      { path: "/add-crop", 
+        element: 
+        <PrivateRoute>
+          <AddCrops></AddCrops>
+        </PrivateRoute>
+       },
+      { path: "/my-posts", 
+        element: <PrivateRoute>
+          <MyPosts></MyPosts>
+          </PrivateRoute> ,
+          loader: () => fetch("http://localhost:3000/crops"),
+          },
+      { path: "/my-interests", 
+        element: <PrivateRoute>
+          <MyInterests></MyInterests>
+          </PrivateRoute> ,
+          loader: () => fetch("http://localhost:3000/interests"),
+          
+        },
       { path: "/crop-details/:id", element:
          <PrivateRoute>
           <CropDetails></CropDetails>
@@ -37,8 +61,15 @@ export const router = createBrowserRouter([
         loader:({params})=>fetch(`http://localhost:3000/crops/${params.id}`)  
         },
           
-      { path: "/auth/login", element: <Login /> },
-      { path: "/auth/register", element: <Register /> },
+      { path: "/auth/login", 
+        element: <Login />
+       },
+      { path: "/auth/register",
+         element: <Register /> 
+        },
     ],
   },
+   { path: "*",
+     element: <ErrorPage></ErrorPage>
+     }
 ]);

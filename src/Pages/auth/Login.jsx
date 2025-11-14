@@ -34,7 +34,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center ">
       <div className="p-8 rounded-2xl shadow-lg w-96">
         <h2 className="text-2xl font-bold text-center text-green-700 mb-6">
-          Login to KrishiLink
+          Login 
         </h2>
 
         <form onSubmit={handleLogin} className="space-y-4">
