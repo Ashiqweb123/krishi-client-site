@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 
 import { Link } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
+import toast from "react-hot-toast";
 // import { AuthContext } from "./";
 
 
@@ -19,7 +20,7 @@ const Register = () => {
     createUser(email, password)
       .then(() => {
         updateUserProfile(name, photo);
-        alert("Account created successfully!");
+        toast.success("Account created successfully!");
         setError("");
       })
       .catch((err) => setError(err.message));

@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layout/MainLayout";
 import Home from '../Pages/Home'
 import AllCrops from "../Pages/AllCrops";
-// import Profile from "../Pages/Profile/Profile";
+
 import Login from "../Pages/auth/Login";
 import Register from "../Pages/auth/Register";
 import PrivateRoute from "../Route/PrivateRoute"
@@ -12,9 +12,7 @@ import MyPosts from "../Pages/MyPosts";
 import Profile from "../Pages/Profile";
 import MyInterests from "../Pages/MyInterests";
 import ErrorPage from "../Pages/ErrorPage";
-// import AddCrop from "../Pages/AddCrop/AddCrop";
-// import MyPosts from "../Pages/MyPosts/MyPosts";
-// import MyInterests from "../Pages/MyInterests/MyInterests";
+
 
 
 

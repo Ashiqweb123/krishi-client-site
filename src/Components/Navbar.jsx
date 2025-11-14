@@ -1,7 +1,7 @@
 
 import React, { useContext } from "react";
 
-// import { AuthContext } from "../context/AuthContext";
+
 import { Link, NavLink, Outlet } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
@@ -50,7 +50,7 @@ const { user, signOutUser } = authContext;
    
                {user && (
                  <>
-                   <NavLink to="/profile" className={navLinkClass}>Profile</NavLink>
+                   
                    <NavLink to="/add-crop" className={navLinkClass}>Add Crops</NavLink>
                    <NavLink to="/my-posts" className={navLinkClass}>My Posts</NavLink>
                    <NavLink to="/my-interests" className={navLinkClass}>My Interests</NavLink>

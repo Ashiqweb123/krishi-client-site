@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import toast from "react-hot-toast";
 
 
 const CropInterestForm = ({ crop }) => {
@@ -40,10 +41,10 @@ const CropInterestForm = ({ crop }) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(interest),
       });
-      alert("Interest sent!");
+     toast.success("Interest sent!");
     } catch (err) {
       console.error(err);
-      alert("Error sending interest");
+      toast.error("Error sending interest");
     }
   };
 

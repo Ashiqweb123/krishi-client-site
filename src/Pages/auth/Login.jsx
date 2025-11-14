@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 
 import { Link } from "react-router";
 import { AuthContext } from "../../Context/AuthContext";
+import toast from "react-hot-toast";
 // import { AuthContext } from "../../context/AuthContext";
 
 
@@ -17,7 +18,7 @@ const Login = () => {
     signInUser(email, password)
       .then(() => {
         setError("");
-        alert("Login successful!");
+       toast.success("Login successful!");
       })
       .catch((err) => setError(err.message));
   };
@@ -25,7 +26,7 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then(() => {
-        alert("Logged in with Google!");
+        toast.success("Logged in with Google!");
       })
       .catch((err) => setError(err.message));
   };
