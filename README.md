@@ -1,16 +1,50 @@
-# React + Vite
+KrishiLink – Smart Crop Trading Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN agriculture marketplace where farmers can post their crops and buyers can send interest requests.
+Owners can accept/reject interest, quantities update automatically, and users can view their interest data through charts.
 
-Currently, two official plugins are available:
+🚀 Live Links
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Client (Netlify): https://krishiapp-project.netlify.app/
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+🛠️ Tech Stack
+Frontend
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+React
+
+React Router
+
+Context API (Auth)
+
+Tailwind CSS
+
+Recharts (Pie Chart)
+
+Netlify Deploy
+
+Backend
+
+Node.js
+
+Express.js
+
+MongoDB 
+
+Vercel Serverless
+
+
+
+📌 Core Features
+
+✔ Farmers can upload crop posts
+✔ Buyers can send interest requests
+✔ Owners can Accept / Reject interest
+✔ After acceptance → crop quantity auto reduce
+✔ Sorting options for My Interests page
+✔ Pie Chart visualization on dashboard
+✔ Private routes protection
+✔ Fully mobile responsive
+✔ Custom 404 Error Page
+✔ Real-time UI update after status change

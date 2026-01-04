@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Link, useLoaderData } from "react-router";
 
-
 const AllCrops = () => {
-  const crops = useLoaderData()
+  const crops = useLoaderData();
   const [searchTerm, setSearchTerm] = useState("");
 
-  
+  // Filter crops based on search term
   const filteredCrops = crops.filter((crop) =>
     crop.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -14,25 +13,25 @@ const AllCrops = () => {
   return (
     <section className="py-10 bg-green-50 min-h-screen">
       <div className="container mx-auto px-4">
-        
+        {/* Section Title + Search */}
         <div className="mb-8 text-center">
           <h2 className="text-4xl font-bold mb-4 text-green-800">All Crops</h2>
           <input
             type="text"
-            placeholder="Search likeable crops..."
+            placeholder="Search for crops..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="input input-bordered w-full md:w-1/2 rounded-full"
+            className="input input-bordered w-full md:w-1/2 rounded-full border-green-300 focus:border-green-500 focus:ring focus:ring-green-200 transition"
           />
         </div>
 
-       
+        {/* Crop Cards */}
         {filteredCrops.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredCrops.map((crop) => (
               <div
                 key={crop._id}
-                className="card bg-white shadow-xl hover:shadow-2xl transition border border-green-100"
+                className="card bg-white shadow-md hover:shadow-xl transition border border-green-100 rounded-lg overflow-hidden"
               >
                 <figure>
                   <img
@@ -42,12 +41,12 @@ const AllCrops = () => {
                   />
                 </figure>
                 <div className="card-body">
-                  <h3 className="card-title text-green-700 font-bold">
+                  <h3 className="card-title text-green-700 font-bold text-lg">
                     {crop.name}
                   </h3>
-                  <p className="text-gray-600">Type: {crop.type}</p>
+                  <p className="text-gray-600 text-sm">Type: {crop.type}</p>
                   <p className="text-gray-700 font-semibold">
-                    Price: ৳{crop.price}
+                    Price: ৳{crop?.pricePerUnit}
                   </p>
                   <p className="text-sm text-gray-500">
                     Location: {crop.location}
@@ -64,10 +63,10 @@ const AllCrops = () => {
             ))}
           </div>
         ) : (
-        
+          // No results found
           <div className="text-center mt-10">
             <p className="text-2xl font-semibold text-gray-500">
-              No results found 
+              No crops found for "{searchTerm}"
             </p>
           </div>
         )}
