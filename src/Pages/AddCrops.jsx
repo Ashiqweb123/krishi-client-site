@@ -2,6 +2,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
 const AddCrops = () => {
       const { user } = useContext(AuthContext);
@@ -42,7 +43,7 @@ const AddCrops = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:3000/crops", {
+      const res = await fetch("https://krishilinkapp.vercel.app/crops", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCrop),
@@ -50,11 +51,11 @@ const AddCrops = () => {
 
       if (!res.ok) throw new Error("Failed to add crop");
 
-      alert("✅ Crop added successfully!");
+      toast.success(" Crop added successfully!");
       navigate("/my-posts"); 
     } catch (err) {
       console.error(err);
-      alert("Error adding crop!");
+      toast.error("Error adding crop!");
     }
   };
     return (

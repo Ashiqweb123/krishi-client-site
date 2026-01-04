@@ -9,7 +9,7 @@ import PrivateRoute from "../Route/PrivateRoute"
 import CropDetails from "../Pages/CropDetails";
 import AddCrops from "../Pages/AddCrops";
 import MyPosts from "../Pages/MyPosts";
-import Profile from "../Pages/Profile";
+
 import MyInterests from "../Pages/MyInterests";
 import ErrorPage from "../Pages/ErrorPage";
 
@@ -23,16 +23,13 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", 
         element:<Home></Home>,
-        loader:()=> fetch('http://localhost:3000/crops/latest'),
+        loader:()=> fetch('https://krishilinkapp.vercel.app/crops/latest'),
     },
       { path: "/all-crops", 
         element: <AllCrops /> ,
-        loader: ()=> fetch('http://localhost:3000/crops'),
+        loader: ()=> fetch('https://krishilinkapp.vercel.app/crops'),
       },
-      { path: "/profile", 
-        element: <PrivateRoute>
-          <Profile></Profile>
-          </PrivateRoute> },
+      
       { path: "/add-crop", 
         element: 
         <PrivateRoute>
@@ -43,20 +40,20 @@ export const router = createBrowserRouter([
         element: <PrivateRoute>
           <MyPosts></MyPosts>
           </PrivateRoute> ,
-          loader: () => fetch("http://localhost:3000/crops"),
+          loader: () => fetch("https://krishilinkapp.vercel.app/crops"),
           },
       { path: "/my-interests", 
         element: <PrivateRoute>
           <MyInterests></MyInterests>
           </PrivateRoute> ,
-          loader: () => fetch("http://localhost:3000/interests"),
+          loader: () => fetch("https://krishilinkapp.vercel.app/interests"),
           
         },
       { path: "/crop-details/:id", element:
          <PrivateRoute>
           <CropDetails></CropDetails>
           </PrivateRoute>,
-        loader:({params})=>fetch(`http://localhost:3000/crops/${params.id}`)  
+        loader:({params})=>fetch(`https://krishilinkapp.vercel.app/crops/${params.id}`)  
         },
           
       { path: "/auth/login", 

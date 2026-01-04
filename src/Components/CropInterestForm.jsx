@@ -36,7 +36,7 @@ const CropInterestForm = ({ crop }) => {
     };
 
     try {
-      await fetch(`http://localhost:3000/crops/${crop._id}/interest`, {
+      await fetch(`https://krishilinkapp.vercel.app/crops/${crop._id}/interest`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(interest),

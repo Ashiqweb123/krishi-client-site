@@ -7,7 +7,7 @@ const CropReceivedInterests = ({ crop }) => {
 
   const handleUpdateStatus = async (interestId, status) => {
     try {
-      const res = await fetch(`http://localhost:3000/crops/${crop._id}/interest/${interestId}`, {
+      const res = await fetch(`https://krishilinkapp.vercel.app/crops/${crop._id}/interest/${interestId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
