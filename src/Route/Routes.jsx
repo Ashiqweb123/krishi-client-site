@@ -12,7 +12,9 @@ import MyPosts from "../Pages/MyPosts";
 import MyInterests from "../Pages/MyInterests";
 import ErrorPage from "../Pages/ErrorPage";
 
-import FAQ from "../Pages/FAQ";
+import ProfilePage from "../Pages/ProfilePage";
+import FAQPage from "../Pages/FAQPage";
+import AboutPage from "../Pages/AboutPage";
 
 export const router = createBrowserRouter([
   {
@@ -28,10 +30,6 @@ export const router = createBrowserRouter([
         path: "/all-crops",
         element: <AllCrops />,
         loader: () => fetch("https://krishilinkapp.vercel.app/crops"),
-      },
-      {
-        path: "/faq",
-        element: <FAQ />,
       },
 
       {
@@ -75,6 +73,18 @@ export const router = createBrowserRouter([
         element: <Register />,
       },
     ],
+  },
+  {
+    path: "profile",
+    element: <ProfilePage></ProfilePage>,
+  },
+  {
+    path: "about",
+    element: <AboutPage></AboutPage>,
+  },
+  {
+    path: "faq",
+    element: <FAQPage></FAQPage>,
   },
   {
     path: "*",
