@@ -4,10 +4,23 @@ import { Link, useLoaderData } from "react-router";
 const AllCrops = () => {
   const crops = useLoaderData();
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const cropsPerPage = 4;
 
   const filteredCrops = crops.filter((crop) =>
     crop.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const indexOfLastCrop = currentPage * cropsPerPage;
+  const indexOfFirstCrop = indexOfLastCrop - cropsPerPage;
+  const currentCrops = filteredCrops.slice(indexOfFirstCrop, indexOfLastCrop);
+
+  const totalPages = Math.ceil(filteredCrops.length / cropsPerPage);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
     <section className="py-10 bg-green-50 min-h-screen">
@@ -23,9 +36,9 @@ const AllCrops = () => {
           />
         </div>
 
-        {filteredCrops.length > 0 ? (
+        {currentCrops.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {filteredCrops.map((crop) => (
+            {currentCrops.map((crop) => (
               <div
                 key={crop._id}
                 className="bg-white shadow-lg rounded-lg border border-green-100 flex flex-col overflow-hidden h-full"
@@ -65,6 +78,24 @@ const AllCrops = () => {
             <p className="text-2xl font-semibold text-gray-500">
               No results found
             </p>
+          </div>
+        )}
+
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8 gap-2">
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => handlePageChange(i + 1)}
+                className={`px-4 py-2 rounded-lg ${
+                  currentPage === i + 1
+                    ? "bg-green-600 text-white"
+                    : "bg-white border border-green-300 text-green-700 hover:bg-green-100"
+                }`}
+              >
+                {i + 1}
+              </button>
+            ))}
           </div>
         )}
       </div>
