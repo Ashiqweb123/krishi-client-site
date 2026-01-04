@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useLoaderData } from "react-router";
+import toast from "react-hot-toast";
 
 
 const MyPosts = () => {
@@ -37,7 +38,7 @@ const MyPosts = () => {
       description: form.description.value,
     };
 
-    const res = await fetch(`http://localhost:3000/crops/${selectedCrop._id}`, {
+    const res = await fetch(`https://krishilinkapp.vercel.app/crops/${selectedCrop._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updated),
@@ -49,19 +50,19 @@ const MyPosts = () => {
       );
       setCrops(newList);
       setShowEdit(false);
-      alert("Crop updated successfully!");
+      toast.success("Crop updated successfully!");
     }
   };
 
   const confirmDelete = async () => {
-    const res = await fetch(`http://localhost:3000/crops/${selectedCrop._id}`, {
+    const res = await fetch(`https://krishilinkapp.vercel.app/crops/${selectedCrop._id}`, {
       method: "DELETE",
     });
     if (res.ok) {
       const newList = crops.filter((c) => c._id !== selectedCrop._id);
       setCrops(newList);
       setShowDelete(false);
-      alert("Crop deleted!");
+      toast.error("Crop deleted!");
     }
   };
 
