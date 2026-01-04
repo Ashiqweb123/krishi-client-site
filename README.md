@@ -5,9 +5,7 @@ Owners can accept/reject interest, quantities update automatically, and users ca
 
 🚀 Live Links
 
-Client (Netlify): https://krishiapp-project.netlify.app/
-
-
+Client (Netlify): https://krishi-app-project.netlify.app/
 
 🛠️ Tech Stack
 Frontend
