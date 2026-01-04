@@ -11,7 +11,7 @@ import AddCrops from "../Pages/AddCrops";
 import MyPosts from "../Pages/MyPosts";
 import MyInterests from "../Pages/MyInterests";
 import ErrorPage from "../Pages/ErrorPage";
-import CropCategories from "../Pages/CropCategories";
+
 import FAQ from "../Pages/FAQ";
 
 export const router = createBrowserRouter([
@@ -33,10 +33,7 @@ export const router = createBrowserRouter([
         path: "/faq",
         element: <FAQ />,
       },
-      {
-        path: "/categories",
-        element: <CropCategories />,
-      },
+
       {
         path: "/add-crop",
         element: (
