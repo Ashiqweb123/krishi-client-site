@@ -40,7 +40,7 @@ const HeroSlider = () => {
                 Shop Now
               </button>
             </div>
-            <div className="absolute bottom-0 w-full h-12 bg-gradient-to-t from-white/80 to-transparent" />
+            <div className="absolute bottom-0 w-full h-12 bg-linear-to-t from-white/80 to-transparent" />
           </div>
         </SwiperSlide>
 

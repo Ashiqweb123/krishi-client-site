@@ -62,11 +62,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/crop-details/:id",
-        element: (
-          <PrivateRoute>
-            <CropDetails />
-          </PrivateRoute>
-        ),
+        element: <CropDetails />,
         loader: ({ params }) =>
           fetch(`https://krishilinkapp.vercel.app/crops/${params.id}`),
       },
