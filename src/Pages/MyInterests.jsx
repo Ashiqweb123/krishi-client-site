@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router';
+import React, { useState } from "react";
+import { useLoaderData } from "react-router";
 import { PieChart, Pie, Tooltip, Legend, Cell } from "recharts";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A020F0"];
 
 const MyInterests = () => {
-  const interests = useLoaderData();  // [{ cropName, quantity, userName, status, createdAt }]
+  const interests = useLoaderData();
   const [sortBy, setSortBy] = useState("recent");
 
-  
   const sortedInterests = [...interests].sort((a, b) => {
-    if (sortBy === "recent") return new Date(b.createdAt) - new Date(a.createdAt);
+    if (sortBy === "recent")
+      return new Date(b.createdAt) - new Date(a.createdAt);
     if (sortBy === "quantity") return b.quantity - a.quantity;
     if (sortBy === "status") {
       const order = { pending: 1, accepted: 2, rejected: 3 };
@@ -18,11 +18,10 @@ const MyInterests = () => {
     }
   });
 
-  
   const chartData = sortedInterests.map((item, index) => ({
     name: `${item.cropName} (${item.quantity})`,
     value: item.quantity,
-    color: COLORS[index % COLORS.length]
+    color: COLORS[index % COLORS.length],
   }));
 
   return (
@@ -41,7 +40,6 @@ const MyInterests = () => {
         </select>
       </div>
 
-     
       <div className="flex justify-center mb-10">
         <PieChart width={400} height={400}>
           <Pie
@@ -62,7 +60,6 @@ const MyInterests = () => {
         </PieChart>
       </div>
 
-     
       <table className="w-full table-auto border border-gray-300 mt-6">
         <thead className="bg-green-500">
           <tr>

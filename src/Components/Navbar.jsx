@@ -1,14 +1,15 @@
-import React, { useContext } from "react";
-
-import { Link, NavLink, Outlet } from "react-router";
+import React, { useState, useContext } from "react";
+import { Link, NavLink } from "react-router"; // Keep same as your code
 import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false); // Hamburger state
 
   if (!authContext) return null;
 
   const { user, signOutUser } = authContext;
+
   const handleLogout = () => {
     signOutUser()
       .then(() => console.log("User logged out"))
@@ -33,8 +34,8 @@ const Navbar = () => {
           <h1 className="text-xl font-bold text-green-700">KrishiLink</h1>
         </Link>
 
-        {/* Links */}
-        <div className="flex items-center gap-6">
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-6">
           <NavLink to="/" className={navLinkClass}>
             Home
           </NavLink>
@@ -49,6 +50,12 @@ const Navbar = () => {
           </NavLink>
           <NavLink to="/about" className={navLinkClass}>
             About
+          </NavLink>
+          <NavLink to="/feauture-crops" className={navLinkClass}>
+            Feature Crops
+          </NavLink>
+          <NavLink to="/reviewes" className={navLinkClass}>
+            Reviewes
           </NavLink>
 
           {!user && (
@@ -92,7 +99,143 @@ const Navbar = () => {
             </>
           )}
         </div>
+
+        {/* Hamburger Icon */}
+        <div
+          className="md:hidden flex flex-col gap-1 cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span
+            className={`block w-6 h-0.5 bg-green-700 transition-transform ${
+              isOpen ? "rotate-45 translate-y-1.5" : ""
+            }`}
+          ></span>
+          <span
+            className={`block w-6 h-0.5 bg-green-700 transition-opacity ${
+              isOpen ? "opacity-0" : ""
+            }`}
+          ></span>
+          <span
+            className={`block w-6 h-0.5 bg-green-700 transition-transform ${
+              isOpen ? "-rotate-45 -translate-y-1.5" : ""
+            }`}
+          ></span>
+        </div>
       </nav>
+
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden bg-white shadow-md transition-max-height duration-300 overflow-hidden ${
+          isOpen ? "max-h-screen" : "max-h-0"
+        }`}
+      >
+        <div className="flex flex-col items-center gap-4 py-4">
+          <NavLink
+            to="/"
+            className={navLinkClass}
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            to="/all-crops"
+            className={navLinkClass}
+            onClick={() => setIsOpen(false)}
+          >
+            All Crops
+          </NavLink>
+          <NavLink
+            to="/faq"
+            className={navLinkClass}
+            onClick={() => setIsOpen(false)}
+          >
+            FAQ
+          </NavLink>
+          <NavLink
+            to="/profile"
+            className={navLinkClass}
+            onClick={() => setIsOpen(false)}
+          >
+            My Profile
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={navLinkClass}
+            onClick={() => setIsOpen(false)}
+          >
+            About
+          </NavLink>
+          <NavLink
+            to="/feauture-crops"
+            className={navLinkClass}
+            onClick={() => setIsOpen(false)}
+          >
+            Feature Crops
+          </NavLink>
+          <NavLink
+            to="/reviewes"
+            className={navLinkClass}
+            onClick={() => setIsOpen(false)}
+          >
+            Reviewes
+          </NavLink>
+
+          {!user && (
+            <>
+              <NavLink
+                to="/auth/login"
+                className={navLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/auth/register"
+                className={navLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                Register
+              </NavLink>
+            </>
+          )}
+
+          {user && (
+            <>
+              <NavLink
+                to="/add-crop"
+                className={navLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                Add Crops
+              </NavLink>
+              <NavLink
+                to="/my-posts"
+                className={navLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                My Posts
+              </NavLink>
+              <NavLink
+                to="/my-interests"
+                className={navLinkClass}
+                onClick={() => setIsOpen(false)}
+              >
+                My Interests
+              </NavLink>
+
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="bg-green-600 text-white px-3 py-1 rounded-lg hover:bg-green-700"
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
+      </div>
     </header>
   );
 };
