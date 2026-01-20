@@ -17,6 +17,8 @@ import FAQPage from "../Pages/FAQPage";
 import AboutPage from "../Pages/AboutPage";
 import FeaturedCrops from "../Pages/FeaturedCrops";
 import FeaturedCropsWithReviews from "../Pages/FeaturedCropsWithReviews";
+import TermsAndConditions from "../Pages/TermsAndConditions";
+import ContactUs from "../Pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,20 @@ export const router = createBrowserRouter([
       {
         path: "/feauture-crops",
         element: <FeaturedCrops></FeaturedCrops>,
+      },
+
+      {
+        path: "terms",
+        element: <TermsAndConditions></TermsAndConditions>,
+      },
+
+      {
+        path: "contact",
+        element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "about",
+        element: <AboutPage></AboutPage>,
       },
       {
         path: "/reviewes",
@@ -88,13 +104,14 @@ export const router = createBrowserRouter([
     path: "profile",
     element: <ProfilePage></ProfilePage>,
   },
-  {
-    path: "about",
-    element: <AboutPage></AboutPage>,
-  },
+
   {
     path: "faq",
     element: <FAQPage></FAQPage>,
+  },
+  {
+    path: "terms",
+    element: <TermsAndConditions></TermsAndConditions>,
   },
   {
     path: "*",

@@ -1,16 +1,12 @@
-
-import './App.css'
+import "./App.css";
+import ThemeToggle from "./Pages/ThemeToggle";
 
 function App() {
- 
-
   return (
     <>
-    
-      <h1 className='text-red-500 text-2xl'>Vite + React</h1>
-      
+      <h1 className="text-red-500 text-2xl">Vite + React</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

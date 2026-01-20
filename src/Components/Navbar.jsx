@@ -1,13 +1,13 @@
-import React, { useState, useContext } from "react";
-import { Link, NavLink } from "react-router"; // Keep same as your code
+import React, { useState, useContext, useEffect } from "react";
+import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const [isOpen, setIsOpen] = useState(false); // Hamburger state
+  const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   if (!authContext) return null;
-
   const { user, signOutUser } = authContext;
 
   const handleLogout = () => {
@@ -20,6 +20,17 @@ const Navbar = () => {
     isActive
       ? "text-green-600 font-semibold"
       : "text-gray-700 hover:text-green-600";
+
+  // Theme effect
+  useEffect(() => {
+    const html = document.querySelector("html");
+    html.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light");
+  };
 
   return (
     <header className="bg-white shadow-md sticky top-0 z-50">
@@ -41,9 +52,6 @@ const Navbar = () => {
           </NavLink>
           <NavLink to="/all-crops" className={navLinkClass}>
             All Crops
-          </NavLink>
-          <NavLink to="/faq" className={navLinkClass}>
-            FAQ
           </NavLink>
           <NavLink to="/profile" className={navLinkClass}>
             My Profile
@@ -98,6 +106,15 @@ const Navbar = () => {
               )}
             </>
           )}
+
+          {/* Theme Toggle */}
+          <input
+            type="checkbox"
+            onChange={(e) => handleTheme(e.target.checked)}
+            defaultChecked={theme === "dark"}
+            className="toggle ml-4"
+            title="Toggle Dark/Light"
+          />
         </div>
 
         {/* Hamburger Icon */}

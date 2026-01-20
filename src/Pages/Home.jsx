@@ -3,23 +3,32 @@ import HeroSlider from "./HeroSlider";
 import Works from "./works";
 import AgroNews from "./AgroNews";
 import LatestCrops from "./LatestCrops";
-
+import WhyKrishiLink from "./WhyKrishiLink";
+import FAQPage from "./FAQPage";
 const Home = () => {
   return (
     <div>
-      <HeroSlider />
+      {" "}
+      <HeroSlider />{" "}
       <div>
-        <Works></Works>
+        {" "}
+        <Works></Works>{" "}
+      </div>{" "}
+      <div>
+        {" "}
+        <AgroNews></AgroNews>{" "}
+      </div>{" "}
+      <div>
+        {" "}
+        <LatestCrops></LatestCrops>{" "}
       </div>
       <div>
-        <AgroNews></AgroNews>
+        <WhyKrishiLink></WhyKrishiLink>
       </div>
-
       <div>
-        <LatestCrops></LatestCrops>
+        <FAQPage></FAQPage>
       </div>
     </div>
   );
 };
-
 export default Home;
