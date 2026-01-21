@@ -1,109 +1,162 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router";
+import { motion } from "framer-motion";
 import CropInterestForm from "../Components/CropInterestForm";
 import CropReceivedInterests from "../Components/CropReceivedInterests";
 import { AuthContext } from "../Context/AuthContext";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 const CropDetails = () => {
   const { user } = useContext(AuthContext);
   const crop = useLoaderData();
 
   return (
-    <div>
-      <section className="container mx-auto px-4 py-10">
-        <div className="flex flex-col md:flex-row gap-8 bg-green-50 rounded-lg shadow-lg p-6">
-          <div className="md:w-1/2">
-            <img
+    <div className="bg-green-50 min-h-screen">
+      {/* Crop Details Card */}
+      <motion.section
+        initial="hidden"
+        whileInView="show"
+        variants={fadeUp}
+        viewport={{ once: true }}
+        className="container mx-auto px-4 py-10"
+      >
+        <div className="flex flex-col lg:flex-row gap-8 bg-white rounded-2xl shadow-lg p-6 lg:p-10">
+          {/* Image */}
+          <div className="lg:w-1/2">
+            <motion.img
               src={crop.image}
               alt={crop.name}
-              className="w-full h-auto rounded-lg object-cover"
+              className="w-full h-auto rounded-xl object-cover shadow-md"
+              initial={{ scale: 0.95, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
             />
           </div>
 
-          <div className="md:w-1/2 flex flex-col justify-between gap-6">
-            <div>
-              <h1 className="text-3xl font-bold text-green-700 mb-4">
-                {crop.name}
-              </h1>
+          {/* Crop Info */}
+          <div className="lg:w-1/2 flex flex-col gap-6">
+            {/* Title */}
+            <motion.h1
+              variants={fadeUp}
+              className="text-3xl md:text-4xl font-bold text-green-700"
+            >
+              {crop.name}
+            </motion.h1>
 
-              <section className="mb-4">
-                <h2 className="text-xl font-semibold mb-2 text-green-700">
-                  Overview / Description
-                </h2>
-                <p className="text-gray-700">{crop.description}</p>
-              </section>
+            {/* Overview */}
+            <motion.section variants={fadeUp}>
+              <h2 className="text-xl font-semibold mb-2 text-green-700">
+                Overview / Description
+              </h2>
+              <p className="text-gray-700 leading-relaxed">
+                {crop.description}
+              </p>
+            </motion.section>
 
-              <section className="mb-4">
-                <h2 className="text-xl font-semibold mb-2 text-green-700">
-                  Key Information / Specs
-                </h2>
-                <p className="text-gray-700">
+            {/* Key Specs */}
+            <motion.section variants={fadeUp}>
+              <h2 className="text-xl font-semibold mb-2 text-green-700">
+                Key Information
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-gray-700">
+                <p>
                   <strong>Type:</strong> {crop.type}
                 </p>
-                <p className="text-gray-700">
+                <p>
                   <strong>Quantity:</strong> {crop.quantity} {crop.unit}
                 </p>
-                <p className="text-gray-700">
+                <p>
                   <strong>Price per Unit:</strong> {crop.pricePerUnit} BDT
                 </p>
-                <p className="text-gray-700">
+                <p>
                   <strong>Location:</strong> {crop.location}
                 </p>
-              </section>
+                <p>
+                  <strong>Status:</strong> {crop.status || "Available"}
+                </p>
+                <p>
+                  <strong>Rating:</strong> {crop.rating || "N/A"}
+                </p>
+              </div>
+            </motion.section>
 
-              {crop.reviews?.length > 0 && (
-                <section className="mb-4">
-                  <h2 className="text-xl font-semibold mb-2 text-green-700">
-                    Reviews / Ratings
-                  </h2>
-                  <ul className="text-gray-700 list-disc list-inside">
-                    {crop.reviews.map((review, idx) => (
-                      <li key={idx}>
-                        <strong>{review.user}:</strong> {review.comment} (
-                        {review.rating}/5)
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              )}
+            {/* Reviews */}
+            {crop.reviews?.length > 0 && (
+              <motion.section variants={fadeUp}>
+                <h2 className="text-xl font-semibold mb-2 text-green-700">
+                  Reviews
+                </h2>
+                <ul className="text-gray-700 list-disc list-inside space-y-2">
+                  {crop.reviews.map((review, idx) => (
+                    <li
+                      key={idx}
+                      className="bg-green-50 p-2 rounded-md shadow-sm"
+                    >
+                      <strong>{review.user}:</strong> {review.comment} (
+                      {review.rating}/5)
+                    </li>
+                  ))}
+                </ul>
+              </motion.section>
+            )}
 
-              {crop.related?.length > 0 && (
-                <section className="mb-4">
-                  <h2 className="text-xl font-semibold mb-2 text-green-700">
-                    Related / Suggested Items
-                  </h2>
-                  <div className="flex flex-wrap gap-4">
-                    {crop.related.map((item) => (
-                      <div
-                        key={item._id}
-                        className="bg-white shadow rounded-lg p-2 w-32 text-center"
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.name}
-                          className="w-full h-20 object-cover rounded"
-                        />
-                        <p className="text-sm text-green-700 font-semibold mt-1">
-                          {item.name}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              )}
-            </div>
+            {/* Related Crops */}
+            {crop.related?.length > 0 && (
+              <motion.section variants={fadeUp}>
+                <h2 className="text-xl font-semibold mb-2 text-green-700">
+                  Related / Suggested Items
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {crop.related.map((item) => (
+                    <motion.div
+                      key={item._id}
+                      whileHover={{ scale: 1.05 }}
+                      className="bg-white shadow rounded-lg overflow-hidden cursor-pointer transition"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full h-28 object-cover rounded-t-lg"
+                      />
+                      <p className="text-green-700 font-semibold text-center py-2 text-sm">
+                        {item.name}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.section>
+            )}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="container mx-auto px-4 py-6">
+      {/* Crop Interest Form */}
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="container mx-auto px-4 py-6"
+      >
         <CropInterestForm crop={crop} />
-      </section>
+      </motion.section>
 
+      {/* Owner Received Interests */}
       {user && user.email === crop.owner.ownerEmail && (
-        <section className="container mx-auto px-4 py-6">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="container mx-auto px-4 py-6"
+        >
           <CropReceivedInterests crop={crop} />
-        </section>
+        </motion.section>
       )}
     </div>
   );

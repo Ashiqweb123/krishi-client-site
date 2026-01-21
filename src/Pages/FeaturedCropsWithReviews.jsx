@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const cropSkills = [
   { name: "Tomato", rating: 80 },
@@ -6,37 +7,70 @@ const cropSkills = [
   { name: "Carrot", rating: 75 },
   { name: "Cucumber", rating: 90 },
 ];
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
 const FeaturedCropsWithReviews = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-20 bg-gradient-to-br from-green-50 to-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-10 text-green-800">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-green-800"
+        >
           Crop Reviews
-        </h2>
+        </motion.h2>
 
-        <div className="space-y-6 max-w-md mx-auto">
+        {/* Crop Bars */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="space-y-6 max-w-md mx-auto"
+        >
           {cropSkills.map((crop, idx) => (
-            <div key={idx}>
-              {/* Name left, percentage right */}
-              <div className="flex justify-between mb-1">
+            <motion.div key={idx} variants={item}>
+              {/* Name & Percentage */}
+              <div className="flex justify-between mb-2">
                 <span className="text-gray-800 font-semibold">{crop.name}</span>
                 <span className="text-gray-600 font-medium">
                   {crop.rating}%
                 </span>
               </div>
 
-              <div className="w-full bg-green-200 rounded-full h-4">
-                <div
+              {/* Animated Progress Bar */}
+              <div className="w-full bg-green-200 rounded-full h-4 overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${crop.rating}%` }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
                   className="h-4 rounded-full"
-                  style={{
-                    width: `${crop.rating}%`,
-                    backgroundColor: "#166534",
-                  }}
-                ></div>
+                  style={{ backgroundColor: "#166534" }}
+                ></motion.div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
