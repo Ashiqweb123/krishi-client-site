@@ -3,9 +3,7 @@ KrishiLink – Smart Crop Trading Platform
 A full-stack MERN agriculture marketplace where farmers can post their crops and buyers can send interest requests.
 Owners can accept/reject interest, quantities update automatically, and users can view their interest data through charts.
 
-🚀 Live Links
-
-Client (Netlify): https://krishi-app-project.netlify.app/
+Live link : https://krishiapp-project.netlify.app/
 
 🛠️ Tech Stack
 Frontend
